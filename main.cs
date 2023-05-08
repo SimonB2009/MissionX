@@ -10,8 +10,6 @@ namespace MissionXMenue
          showInstruction();
          showMenue();
 
-         Console.ForegroundColor = ConsoleColor.Magenta;
-         Console.Write("⟫ ");
 
          do {
             if (Console.ReadLine() == "m") {
@@ -19,6 +17,11 @@ namespace MissionXMenue
                Console.Write("");
                showMenue();
             }
+
+            if (Console.ReadLine() == "l") {
+               Environment.Exit(0);
+            }
+
          } while (true);     
       }
 
@@ -66,6 +69,9 @@ namespace MissionXMenue
          Console.WriteLine("- Press \"m\" to go back to the menue");
          Console.WriteLine("");
          Console.WriteLine("");
+         Console.ForegroundColor = ConsoleColor.Magenta;
+         Console.Write("⟫ ");
+         Console.ForegroundColor = ConsoleColor.White;
       }
    }
 }
