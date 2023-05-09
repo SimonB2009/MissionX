@@ -3,35 +3,49 @@ using MissionXRun;
 
 namespace MissionXMenue
 {
-   class Menue : Run  {
+   class Menue {
 
       static void Main(string[] args) {
-         clear();
+         Console.Clear();
+   
          showInstruction();
          showMenue();
 
-
          do {
-            if (Console.ReadLine() == "m") {
+            Console.SetCursorPosition(0,10);
+            Console.Write("        "); // delete last command
+            Console.SetCursorPosition(0,10);
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("⟫ ");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            string command = Console.ReadLine();
+
+            if (command == "m") {
                Console.Write("");
                Console.Write("");
                showMenue();
             }
 
-            if (Console.ReadLine() == "l") {
+            if (command == "l") {
                Environment.Exit(0);
+            }
+
+            if (command == "i") {
+               showCommands();
+            }
+            if (command == "s") {
+               start();
             }
 
          } while (true);     
       }
 
-      static void clear() { // first clear Console
-         for (int i = 0; i < 100; i++) {
-            Console.WriteLine();
-         }
-      }
+      
 
       static void showInstruction() { // Instruction and Name
+         Console.SetCursorPosition(0,20);
          showLogo();
          Console.WriteLine("");
          Console.WriteLine("");
@@ -59,19 +73,66 @@ namespace MissionXMenue
 
       static void showMenue() {
          Console.ForegroundColor = ConsoleColor.DarkYellow;
+         Console.SetCursorPosition(0,1);
          Console.WriteLine("               MENUE");
          Console.WriteLine("");
          Console.WriteLine("");
          Console.ForegroundColor = ConsoleColor.White;
          Console.WriteLine("- Press \"s\" to start"); 
          Console.WriteLine("- Press \"l\" to leave the game");
-         Console.WriteLine("- Press \"i\" to get the instruction for the game.");
+         Console.WriteLine("- Press \"i\" to get infos how to controll in game.");
          Console.WriteLine("- Press \"m\" to go back to the menue");
          Console.WriteLine("");
          Console.WriteLine("");
-         Console.ForegroundColor = ConsoleColor.Magenta;
-         Console.Write("⟫ ");
-         Console.ForegroundColor = ConsoleColor.White;
       }
+
+      static void showCommands() {
+         Console.WriteLine("");
+         Console.WriteLine("");
+         Console.ForegroundColor = ConsoleColor.Green;
+         Console.Write("-↑ : "); // key
+         Console.ForegroundColor = ConsoleColor.White;
+         Console.WriteLine("Press for more thrust"); // Command discription
+         Console.ForegroundColor = ConsoleColor.Green; 
+         Console.Write("-↓ : "); // key
+         Console.ForegroundColor = ConsoleColor.White;
+         Console.WriteLine("Press for less thrust"); // Command discription
+         Console.WriteLine("");
+         Console.WriteLine("");
+      }
+
+      static void start() {
+         clearGameField();
+         Console.SetCursorPosition(0,20);
+         Console.Write("Geschwindigkeit: ");
+         Console.SetCursorPosition(40,20);
+         Console.Write("Höhe:");
+         Random rnd = new Random();
+
+         for (int i = 1; i < 200; i++) {
+            Thread.Sleep(100);
+            Console.SetCursorPosition(19,20);
+            Console.Write(rnd.Next(1,100));
+            Console.SetCursorPosition(47,20);
+            Console.Write(rnd.Next(100,300));
+            if (i % 10 == 0) {
+               Console.SetCursorPosition(60,i/10);  
+               Console.Write("*");
+               Console.SetCursorPosition(60,(i-1)/10);
+               Console.Write(" ");
+               Console.SetCursorPosition(0,20);
+            }
+
+        }
+
+      }
+      static void clearGameField(){
+        Console.SetCursorPosition(0,20);
+        for (int i = 0; i < 10; i++) {
+         Console.WriteLine("                                                                                                 ");
+        }
+
+      }
+
    }
 }
